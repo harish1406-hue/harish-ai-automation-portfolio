@@ -7,9 +7,9 @@ Live site: https://harish-ai-automation-portfolio.vercel.app/
 ## Design and interactions
 
 - Photographic portrait at the center of an AI workflow canvas.
-- A labeled, client-side invoice workflow simulation with replay controls. This is a demonstration of processing stages, not a live backend workflow.
+- A labeled, automatically looping client-side invoice workflow simulation with pause/resume controls. This is a demonstration of processing stages, not a live backend workflow.
 - Optional spoken introduction using the browser's speech synthesis voice, with a text transcript.
-- Workflow architecture previews and detailed project case studies.
+- Automatically animated workflow architecture previews and detailed project case studies. Animations pause outside the viewport, while the tab is hidden, or when reduced motion is requested.
 - Experience, education, engineering capabilities, and downloadable résumé.
 - Responsive layouts, reduced-motion support, keyboard-accessible case-study dialogs, SEO metadata, and Vercel Analytics.
 
