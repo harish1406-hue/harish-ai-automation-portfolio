@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, Braces, Check, Cpu, Database, FileText, GitBranch, Play, Pause, Square, Volume2 } from "lucide-react";
-const intro = "Hi, I'm Harish Velayutham, an AI Automation Engineer in Vilnius, Lithuania. I build reliable workflows, AI assistants, and API integrations using n8n, Python, and Node.js. This is my engineering portfolio. Explore the systems I've built and the experience behind them.";
+import { ArrowDown, ArrowUpRight, Braces, Check, Cpu, Database, FileText, GitBranch, Play, Pause } from "lucide-react";
 const steps = ["Waiting for input", "Document received", "AI extracts invoice fields", "Required fields validated", "Structured record ready"];
 export default function StudioHero() {
   const [phase, setPhase] = useState(0);
@@ -21,25 +20,11 @@ export default function StudioHero() {
     document.addEventListener("visibilitychange", updateVisibility);
     return () => { observer.disconnect(); preference.removeEventListener("change", updatePreference); document.removeEventListener("visibilitychange", updateVisibility); };
   }, []);
-  const [speaking, setSpeaking] = useState(false);
-  const [audioReady, setAudioReady] = useState(false);
-  const [audioError, setAudioError] = useState("");
-  const utterance = useRef<SpeechSynthesisUtterance | null>(null);
-  useEffect(() => { setAudioReady("speechSynthesis" in window); return () => { if ("speechSynthesis" in window) window.speechSynthesis.cancel(); }; }, []);
   useEffect(() => {
     if (!running || !inView || !pageVisible) return;
     const timer = window.setTimeout(() => setPhase(p => (p + 1) % 5), phase === 4 ? 2400 : 1400);
     return () => window.clearTimeout(timer);
   }, [phase, running, inView, pageVisible]);
-  function playIntro() {
-    if (speaking) { window.speechSynthesis.cancel(); setSpeaking(false); return; }
-    const speech = new SpeechSynthesisUtterance(intro);
-    speech.lang = "en-GB"; speech.rate = .94;
-    speech.voice = window.speechSynthesis.getVoices().find(v => v.lang === "en-GB") || null;
-    speech.onstart = () => setSpeaking(true); speech.onend = () => setSpeaking(false);
-    speech.onerror = () => {setSpeaking(false);setAudioError("Audio unavailable. Read the intro below.");};
-    utterance.current = speech; setAudioError(""); window.speechSynthesis.speak(speech);
-  }
   return <section id="top" className="studio-hero">
     <div className="studio-heading section-shell">
       <div className="studio-eyebrow"><span className="status-dot"/> HARISH VELAYUTHAM <span className="eyebrow-divider">/</span> VILNIUS, LITHUANIA</div>
@@ -89,7 +74,6 @@ export default function StudioHero() {
     </div>
     <div className="studio-intro section-shell">
       <div><p>I build the systems that turn <strong>complex processes into clear outcomes.</strong> Workflow orchestration, grounded AI, and reliable integrations.</p><div className="studio-actions"><a className="button" href="#work">Explore the systems <ArrowUpRight size={17}/></a><a className="resume-link" href="/Harish-Velayutham-Resume.pdf" download>Download résumé <ArrowDown size={15}/></a></div></div>
-      <div className="voice-panel"><button onClick={playIntro} disabled={!audioReady} aria-pressed={speaking}>{speaking?<Square size={16}/>:<Volume2 size={18}/>}<span>{speaking?'Stop introduction':'Meet the engineer'}<small>SHORT AUDIO INTRODUCTION</small></span><span className={`voice-wave ${speaking?'playing':''}`}><i/><i/><i/><i/><i/></span></button><details><summary>Read introduction</summary><p>{intro}</p></details>{audioError&&<p role="status">{audioError}</p>}</div>
     </div>
     <div className="studio-scroll section-shell"><span>ENGINEERING PORTFOLIO / 2026</span><a href="#work">Explore below <ArrowDown size={12}/></a></div>
   </section>;
