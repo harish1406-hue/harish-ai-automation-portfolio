@@ -1,86 +1,47 @@
-# Harish Velayutham — AI Automation Portfolio
+# Harish Velayutham — AI & Automation Studio
 
-A modern portfolio for a Full-Stack AI Automation Engineer, built with Next.js and TypeScript.
+Professional engineering portfolio focused on AI automation, workflow orchestration, RAG, and backend integrations. Based in Vilnius, Lithuania.
 
-## Included
+Live site: https://harish-ai-automation-portfolio.vercel.app/
 
-- Responsive, modern single-page experience
-- Detailed interactive project case studies
-- RAG, multi-agent AI and memory capabilities
-- Live dashboard and result-tracing positioning
-- Prompt-injection and AI guardrail architecture
-- Experience and education timeline
-- SEO metadata and Vercel Analytics integration
-- Provisional entries for ShowroomAI and MeetingFlow AI
+## Design and interactions
 
-## Run locally
+- Photographic portrait at the center of an AI workflow canvas.
+- A labeled, client-side invoice workflow simulation with replay controls. This is a demonstration of processing stages, not a live backend workflow.
+- Optional spoken introduction using the browser's speech synthesis voice, with a text transcript.
+- Workflow architecture previews and detailed project case studies.
+- Experience, education, engineering capabilities, and downloadable résumé.
+- Responsive layouts, reduced-motion support, keyboard-accessible case-study dialogs, SEO metadata, and Vercel Analytics.
 
-1. Install Node.js 20 or newer.
-2. Open a terminal in this folder.
-3. Run:
+## Development
 
-```bash
-npm install
+Requires Node.js 20 or newer.
+
+```sh
+npm ci
 npm run dev
 ```
 
-4. Open `http://localhost:3000`.
+Open http://localhost:3000.
 
-## Build check
-
-```bash
+```sh
+npm run lint
 npm run build
 npm run start
 ```
 
-## Recommended deployment: GitHub + Vercel
+The lint command performs TypeScript checking.
 
-1. Create a new GitHub repository, for example `harish-portfolio`.
-2. Upload or push this project.
-3. Sign in to Vercel with GitHub.
-4. Select **Add New → Project**.
-5. Import the repository.
-6. Keep the default Next.js build settings and click **Deploy**.
-7. Add a custom domain later from **Project Settings → Domains**.
+## Content and design
 
-Every push to the production branch can redeploy automatically. Pull requests can also receive preview deployments.
+- `data/portfolio.ts`: project descriptions, architecture stages, and skills. Unverified provisional entries are excluded from display.
+- `components/Portfolio.tsx`: experience, education, navigation, and project dialogs.
+- `components/StudioHero.tsx`: portrait canvas, workflow simulation, and spoken introduction.
+- `components/ProjectWorkflow.tsx`: compact project diagrams.
+- `app/studio.css`: current site theme and responsive layout.
+- `public/media/harish-studio-v2.png`: AI-edited photographic portrait from the supplied reference; transparent PNG.
+- `public/Harish-Velayutham-Resume.pdf`: downloadable résumé.
 
-## Content updates
+## Deployment
 
-Most portfolio content is stored in:
-
-```text
-data/portfolio.ts
-```
-
-Edit project names, descriptions, outcomes, stacks and repository links there.
-
-## Important before publishing
-
-- Replace provisional descriptions for `showroom-ai` and `meetingflow-ai` after source review.
-- Add genuine metrics only when verified.
-- Add a LinkedIn URL if desired.
-- Add screenshots or short demo videos for the four featured case studies.
-- Never publish API keys, bearer tokens, private webhook URLs or client data.
-
-## Recommended screenshots
-
-For each featured case study, prepare:
-
-1. System architecture diagram
-2. Workflow canvas overview
-3. Input example with sensitive information hidden
-4. Structured output or dashboard
-5. Error-handling or trace view
-6. 30–60 second demo video
-
-## Suggested domain names
-
-- `harishvelayutham.dev`
-- `harishautomation.com`
-- `harishbuilds.ai`
-- `harish-ai.dev`
-
-Check availability before buying.
-
-Automatic Vercel deployment test: 2026-07-27 21:50:15
+This repository belongs to the existing `harish-ai-automation-portfolio` Vercel project. Publish production changes through its connected main branch or the authenticated Vercel CLI. Keep authentication files and environment files outside committed source; they are excluded by `.gitignore`.
