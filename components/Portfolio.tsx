@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Bot,
@@ -16,16 +16,17 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import AvatarIntro from "@/components/AvatarIntro";
 import { projects, skills } from "@/data/portfolio";
 
 const nav = ["Work", "Capabilities", "Architecture", "Experience", "Contact"];
 
 const whatsappUrl =
-  "https://wa.me/37065425110?text=Hello%20Harish%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20an%20AI%20automation%20project.";
+  "https://wa.me/37065425110?text=Hello%20Harish%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20an%20engineering%20role.";
 
 const experience = [
   {
-    date: "Dec 2025 — May 2026",
+    date: "Dec 2025 — Apr 2026",
     role: "Head of AI and Automation",
     company: "Voila AI",
     location: "Nice, France",
@@ -100,6 +101,26 @@ export default function Portfolio() {
   const [activeProject, setActiveProject] =
     useState<(typeof projects)[number] | null>(null);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!activeProject) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    modalRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveProject(null);
+      if (event.key !== "Tab") return;
+      const nodes = modalRef.current?.querySelectorAll<HTMLElement>('button, a[href], [tabindex="0"]');
+      if (!nodes?.length) return;
+      const first = nodes[0], last = nodes[nodes.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = overflow; document.removeEventListener("keydown", onKey); previous?.focus(); };
+  }, [activeProject]);
+
   const featured = useMemo(
     () => projects.filter((project) => project.featured),
     []
@@ -116,6 +137,7 @@ export default function Portfolio() {
         <button
           className="menu-button"
           aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -139,124 +161,26 @@ export default function Portfolio() {
             rel="noreferrer"
           >
             <MessageCircle size={16} />
-            Let&apos;s talk
+            Contact me
           </a>
         </nav>
       </header>
 
-      <section id="top" className="hero section-shell">
+      <section id="top" className="hero section-shell avatar-hero">
+        <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
+        <div className="eyebrow"><span className="pulse" /> AI Automation Engineer · Vilnius, Lithuania</div>
+        <AvatarIntro />
         <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="pulse" />
-            Full-Stack AI Automation Engineer
-          </div>
-
-          <h1>I build reliable AI systems that move work forward.</h1>
-
-          <p className="hero-text">
-            Workflow automation, RAG, custom APIs, operational dashboards and
-            secure AI integrations built for real business processes.
-          </p>
-
+          <p className="hero-name">Hey, I’m Harish Velayutham.</p>
+          <h1>I connect the dots.<br /><span>AI does the heavy lifting.</span></h1>
+          <p className="hero-text">I turn complex, repetitive processes into reliable AI workflows. From intelligent assistants to document pipelines — built to work in the real world.</p>
           <div className="hero-actions">
-            <a className="button" href="#work">
-              Explore selected work
-              <ArrowRight size={18} />
-            </a>
-
-            <a
-              className="button secondary"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <MessageCircle size={18} />
-              Let&apos;s talk on WhatsApp
-            </a>
-          </div>
-
-          <div className="hero-meta">
-            <span>
-              <MapPin size={16} />
-              Kaunas, Lithuania
-            </span>
-
-            <span>
-              <Zap size={16} />
-              Available for AI automation projects
-            </span>
+            <a className="button" href="#work">Explore my work <ArrowRight size={18} /></a>
+            <a className="button secondary" href="/Harish-Velayutham-Resume.pdf" download>Download résumé ↓</a>
+            <a className="button secondary" href="#experience">View experience <ArrowRight size={18} /></a>
           </div>
         </div>
-
-        <div
-          className="system-visual system-visual-redesigned"
-          aria-label="Four-stage AI automation system overview"
-        >
-          <div className="visual-header">
-            <div>
-              <span className="visual-label">SYSTEM ARCHITECTURE</span>
-              <strong>From business input to traceable result</strong>
-            </div>
-
-            <span className="live">
-              <i />
-              Operational
-            </span>
-          </div>
-
-          <div className="system-stages">
-            <article className="system-stage">
-              <span className="stage-number">01</span>
-              <div>
-                <small>CAPTURE</small>
-                <strong>Business inputs</strong>
-                <p>Forms, emails, APIs, documents and application events.</p>
-              </div>
-            </article>
-
-            <article className="system-stage">
-              <span className="stage-number">02</span>
-              <div>
-                <small>ORCHESTRATE</small>
-                <strong>Workflow logic</strong>
-                <p>n8n, APIs, validation rules, routing and retry handling.</p>
-              </div>
-            </article>
-
-            <article className="system-stage">
-              <span className="stage-number">03</span>
-              <div>
-                <small>UNDERSTAND</small>
-                <strong>AI and RAG</strong>
-                <p>Retrieve context, reason, validate and apply guardrails.</p>
-              </div>
-            </article>
-
-            <article className="system-stage">
-              <span className="stage-number">04</span>
-              <div>
-                <small>DELIVER</small>
-                <strong>Action and evidence</strong>
-                <p>Business output, dashboard visibility, alerts and traces.</p>
-              </div>
-            </article>
-          </div>
-
-          <div className="system-summary">
-            <div>
-              <span>Visibility</span>
-              <strong>Live dashboards</strong>
-            </div>
-            <div>
-              <span>Reliability</span>
-              <strong>Failure handling</strong>
-            </div>
-            <div>
-              <span>Security</span>
-              <strong>AI guardrails</strong>
-            </div>
-          </div>
-        </div>
+        <div className="hero-bottom"><span>n8n orchestration</span><span>AI &amp; RAG systems</span><span>Custom API integrations</span><a href="#work">Scroll to explore ↓</a></div>
       </section>
 
       <section className="trust-strip" aria-label="Main technologies">
@@ -311,7 +235,7 @@ export default function Portfolio() {
           <h3>Additional systems</h3>
 
           {projects
-            .filter((project) => !project.featured)
+            .filter((project) => !project.featured && project.status !== "Source review pending")
             .map((project) => (
               <button
                 key={project.slug}
@@ -524,10 +448,10 @@ export default function Portfolio() {
         <div className="section-shell contact-inner">
           <div>
             <span className="kicker">Start a conversation</span>
-            <h2>Have a process that should run better?</h2>
+            <h2>Let’s talk about your engineering team.</h2>
             <p>
-              Let&apos;s turn it into a reliable automation system with clear
-              data, controlled AI and measurable outcomes.
+              Interested in my experience in AI automation, backend integrations
+              or intelligent workflows? Get in touch to discuss a role.
             </p>
           </div>
 
@@ -539,7 +463,7 @@ export default function Portfolio() {
               rel="noreferrer"
             >
               <MessageCircle size={18} />
-              Let&apos;s talk on WhatsApp
+              Contact me on WhatsApp
             </a>
 
             <a
@@ -570,7 +494,7 @@ export default function Portfolio() {
             }
           }}
         >
-          <div className="modal">
+          <div className="modal" ref={modalRef}>
             <button
               className="modal-close"
               aria-label="Close case study"

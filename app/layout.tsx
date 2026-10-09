@@ -104,7 +104,7 @@ const jsonLd = {
     telephone: "+37065425110",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Kaunas",
+      addressLocality: "Vilnius",
       addressCountry: "LT",
     },
     knowsAbout: [
