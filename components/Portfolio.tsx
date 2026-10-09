@@ -16,7 +16,8 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import AvatarIntro from "@/components/AvatarIntro";
+import StudioHero from "@/components/StudioHero";
+import ProjectWorkflow from "@/components/ProjectWorkflow";
 import { projects, skills } from "@/data/portfolio";
 
 const nav = ["Work", "Capabilities", "Architecture", "Experience", "Contact"];
@@ -131,7 +132,7 @@ export default function Portfolio() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Harish Velayutham home">
           <span className="brand-mark">HV</span>
-          <span>Harish Velayutham</span>
+          <span>HARISH<span className="brand-sub"> / AI & AUTOMATION</span></span>
         </a>
 
         <button
@@ -156,9 +157,7 @@ export default function Portfolio() {
 
           <a
             className="button small"
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
+            href="mailto:harishmech415@gmail.com"
           >
             <MessageCircle size={16} />
             Contact me
@@ -166,22 +165,7 @@ export default function Portfolio() {
         </nav>
       </header>
 
-      <section id="top" className="hero section-shell avatar-hero">
-        <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
-        <div className="eyebrow"><span className="pulse" /> AI Automation Engineer · Vilnius, Lithuania</div>
-        <AvatarIntro />
-        <div className="hero-copy">
-          <p className="hero-name">Hey, I’m Harish Velayutham.</p>
-          <h1>I connect the dots.<br /><span>AI does the heavy lifting.</span></h1>
-          <p className="hero-text">I turn complex, repetitive processes into reliable AI workflows. From intelligent assistants to document pipelines — built to work in the real world.</p>
-          <div className="hero-actions">
-            <a className="button" href="#work">Explore my work <ArrowRight size={18} /></a>
-            <a className="button secondary" href="/Harish-Velayutham-Resume.pdf" download>Download résumé ↓</a>
-            <a className="button secondary" href="#experience">View experience <ArrowRight size={18} /></a>
-          </div>
-        </div>
-        <div className="hero-bottom"><span>n8n orchestration</span><span>AI &amp; RAG systems</span><span>Custom API integrations</span><a href="#work">Scroll to explore ↓</a></div>
-      </section>
+      <StudioHero />
 
       <section className="trust-strip" aria-label="Main technologies">
         <span>n8n</span>
@@ -197,19 +181,20 @@ export default function Portfolio() {
       <section id="work" className="section-shell section-block">
         <div className="section-heading">
           <div>
-            <span className="kicker">Selected work</span>
-            <h2>Systems designed around real operational problems.</h2>
+            <span className="kicker">02 / Selected systems</span>
+            <h2>Real problems. Connected systems.</h2>
           </div>
           <p>
-            Each case study explains the problem, architecture, reliability
-            approach and business outcome—not only the tools used.
+            Explore the engineering behind each system: the challenge, the
+            workflow, and the choices that make it reliable.
           </p>
         </div>
 
         <div className="project-grid">
           {featured.map((project, index) => (
             <article className="project-card" key={project.slug}>
-              <div className="project-number">0{index + 1}</div>
+              <div className="project-card-top"><div className="project-number">SYSTEM / 0{index + 1}</div><span>VIEW ARCHITECTURE ↗</span></div>
+              <ProjectWorkflow steps={project.architecture}/>
               <div className="project-category">{project.category}</div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
@@ -257,7 +242,7 @@ export default function Portfolio() {
       <section id="capabilities" className="section-shell section-block">
         <div className="section-heading">
           <div>
-            <span className="kicker">Capabilities</span>
+            <span className="kicker">03 / Engineering toolkit</span>
             <h2>From workflow logic to user-facing visibility.</h2>
           </div>
           <p>
@@ -288,7 +273,7 @@ export default function Portfolio() {
         <div className="section-shell">
           <div className="section-heading light">
             <div>
-              <span className="kicker">Engineering approach</span>
+              <span className="kicker">04 / System principles</span>
               <h2>AI that is observable, grounded and controlled.</h2>
             </div>
 
@@ -362,7 +347,7 @@ export default function Portfolio() {
         <div className="section-shell">
           <div className="section-heading">
             <div>
-              <span className="kicker">Experience</span>
+              <span className="kicker">05 / Experience</span>
               <h2>Hands-on engineering shaped by operational delivery.</h2>
             </div>
 
@@ -447,7 +432,7 @@ export default function Portfolio() {
       <section id="contact" className="contact-section">
         <div className="section-shell contact-inner">
           <div>
-            <span className="kicker">Start a conversation</span>
+            <span className="kicker">06 / Contact</span>
             <h2>Let’s talk about your engineering team.</h2>
             <p>
               Interested in my experience in AI automation, backend integrations

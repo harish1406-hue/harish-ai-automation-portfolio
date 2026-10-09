@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import "./globals.css";
+import "./studio.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
