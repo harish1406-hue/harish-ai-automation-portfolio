@@ -73,7 +73,7 @@ export default function StudioHero() {
       <div className="canvas-footer"><div className="simulation-status" aria-live="off"><span className={`status-dot ${running?'busy':''}`}/><span>WORKFLOW SIMULATION</span><strong>{steps[phase]}</strong></div><button onClick={() => setRunning(value => !value)} aria-pressed={!running} className="run-button">{running?<Pause size={14}/>:<Play size={14}/>} {running?'Pause animation':'Resume animation'}</button></div>
     </div>
     <div className="studio-intro section-shell">
-      <div><p>I build the systems that turn <strong>complex processes into clear outcomes.</strong> Workflow orchestration, grounded AI, and reliable integrations.</p><div className="studio-actions"><a className="button" href="#work">Explore the systems <ArrowUpRight size={17}/></a><a className="resume-link" href="/Harish-Velayutham-Resume.pdf" download>Download résumé <ArrowDown size={15}/></a></div></div>
+      <div><p>I build the systems that turn <strong>complex processes into clear outcomes.</strong> Workflow orchestration, grounded AI, and reliable integrations.</p><div className="studio-actions"><a className="button" href="#work">Explore the systems <ArrowUpRight size={17}/></a><a className="resume-link" href="/Harish-Velayutham-Resume.pdf" download>Download Resume <ArrowDown size={15}/></a></div></div>
     </div>
     <div className="studio-scroll section-shell"><span>ENGINEERING PORTFOLIO / 2026</span><a href="#work">Explore below <ArrowDown size={12}/></a></div>
   </section>;

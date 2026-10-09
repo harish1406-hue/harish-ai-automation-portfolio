@@ -193,7 +193,7 @@ export default function Portfolio() {
         <div className="project-grid">
           {featured.map((project, index) => (
             <article className="project-card" key={project.slug}>
-              <div className="project-card-top"><div className="project-number">SYSTEM / 0{index + 1}</div><span>VIEW ARCHITECTURE ↗</span></div>
+              <div className="project-card-top"><div className="project-number">SYSTEM / 0{index + 1}</div></div>
               <ProjectWorkflow steps={project.architecture}/>
               <div className="project-category">{project.category}</div>
               <h3>{project.title}</h3>
